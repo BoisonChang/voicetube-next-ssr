@@ -1,0 +1,23 @@
+.filter_nav {
+  display: flex;
+}
+
+.filter_btn {
+  font-size: 12px;
+  font-weight: 400;
+  margin-right: 24px;
+  padding: 4px 8px;
+  cursor: pointer;
+  color: #787878;
+}
+
+.filter_btn_active {
+  font-size: 12px;
+  font-weight: 400;
+  margin-right: 24px;
+  padding: 4px 8px;
+  cursor: pointer;
+  background-color: #4283e4;
+  color: #ffffff;
+  border-radius: 4px;
+}

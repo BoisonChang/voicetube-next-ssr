@@ -1,0 +1,30 @@
+{
+  "name": "VoiceTube",
+  "short_name": "VoiceTube",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "icons192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "icons256.png",
+      "type": "image/png",
+      "sizes": "256x256"
+    },
+    {
+      "src": "icons384.png",
+      "type": "image/png",
+      "sizes": "384x384"
+    },
+    {
+      "src": "icons512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    }
+  ],
+  "start_url": "./",
+  "background_color": "#FFFFFF",
+  "display": "standalone"
+}
