@@ -1,0 +1,60 @@
+import { VideoItemType } from "@/types/request";
+
+export const video: VideoItemType = {
+  id: 0,
+  thumbnail: "https://cdn.voicetube.com/assets/thumbnails/wWV0NCPD050.jpg",
+  title: "Quisquam voluptatem quaerat sed est.",
+  views: 32409534,
+  collectCount: 7689,
+  duration: 368,
+  publishedAt: "2021-02-04T16:00:00+00:00",
+  level: 3,
+  captions: ["cht", "en"],
+};
+
+export const videos: VideoItemType[] = [
+  {
+    id: 0,
+    thumbnail: "https://cdn.voicetube.com/assets/thumbnails/wWV0NCPD050.jpg",
+    title: "Quisquam voluptatem quaerat sed est.",
+    views: 32409534,
+    collectCount: 7689,
+    duration: 368,
+    publishedAt: "2021-02-04T16:00:00+00:00",
+    level: 3,
+    captions: ["cht", "en"],
+  },
+  {
+    id: 1,
+    thumbnail: "https://cdn.voicetube.com/assets/thumbnails/xyz123.jpg",
+    title: "Lorem ipsum dolor sit amet.",
+    views: 500000,
+    collectCount: 12000,
+    duration: 270,
+    publishedAt: "2021-03-01T10:00:00+00:00",
+    level: 2,
+    captions: ["en"],
+  },
+  {
+    id: 2,
+    thumbnail: "https://cdn.voicetube.com/assets/thumbnails/abc789.jpg",
+    title: "Consectetur adipiscing elit.",
+    views: 1000000,
+    collectCount: 6000,
+    duration: 600,
+    publishedAt: "2021-02-21T08:00:00+00:00",
+    level: 2,
+    captions: ["cht", "ja", "en"],
+  },
+  {
+    id: 3,
+    thumbnail: "https://cdn.voicetube.com/assets/thumbnails/def456.jpg",
+    title: "Vivamus vestibulum sem ut odio.",
+    views: 2500000,
+    collectCount: 8000,
+    duration: 420,
+    publishedAt: "2021-03-12T14:30:00+00:00",
+    level: 1,
+    captions: ["en"],
+  },
+];

@@ -1,17 +1,14 @@
 import Head from "next/head";
-import Image from "next/image";
-import { Inter } from "next/font/google";
+import axios from "axios";
 import styles from "@/styles/Home.module.scss";
+import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar/navbar";
-import { FilterType } from "@/types/components";
-import { myLoader } from "@/helper/img";
 import Preview from "@/components/Preview/preview";
 import { GetServerSideProps, GetServerSidePropsContext } from "next";
 import { VideoPropsType, VideoItemType } from "@/types/request";
-import axios from "axios";
-
-const inter = Inter({ subsets: ["latin"] });
+import { FilterType } from "@/types/components";
+import { sortFunc } from "@/helper/filter";
 
 export const getServerSideProps: GetServerSideProps<VideoPropsType> = async (
   context: GetServerSidePropsContext
@@ -44,30 +41,29 @@ export const getServerSideProps: GetServerSideProps<VideoPropsType> = async (
   }
 };
 
+const filterCategories: FilterType[] = [
+  { id: 1, name: "發布時間" },
+  { id: 2, name: "觀看次數" },
+  { id: 3, name: "收藏次數" },
+];
+
+const filterLength: FilterType[] = [
+  { id: 1, name: "不限" },
+  { id: 2, name: "4分鐘以下" },
+  { id: 3, name: "5 - 10 分鐘" },
+  { id: 4, name: "超過10 分鐘" },
+];
+
 export default function Home({ data }: VideoPropsType) {
-  const [filterCategories, setFilterCategories] = useState<FilterType[]>([
-    { id: 1, name: "發布時間" },
-    { id: 2, name: "觀看次數" },
-    { id: 3, name: "收藏次數" },
-  ]);
-
-  const [filterLength, setFilterLength] = useState<FilterType[]>([
-    { id: 1, name: "不限" },
-    { id: 2, name: "4分鐘以下" },
-    { id: 3, name: "5 - 10 分鐘" },
-    { id: 4, name: "超過10 分鐘" },
-  ]);
-
   const [videos, setVideos] = useState<VideoItemType[]>([]);
+  const [activeFilterCategory, setActiveFilterCategory] = useState<number>(0);
+  const [activeFilterLength, setActiveFilterLength] = useState<number>(0);
 
   useEffect(() => {
     if (data) {
       setVideos(data.data.videos);
     }
   }, [data]);
-
-  const [activeFilterCategory, setActiveFilterCategory] = useState<number>(0);
-  const [activeFilterLength, setActiveFilterLength] = useState<number>(0);
 
   const handleClick = (filterId: number, type: "category" | "length") => {
     switch (type) {
@@ -82,39 +78,11 @@ export default function Home({ data }: VideoPropsType) {
     }
   };
 
-  function sortFunc(videos: VideoItemType[]) {
-    return videos
-      .filter((video) => {
-        switch (activeFilterLength) {
-          case 2:
-            return video.duration <= 240;
-          case 3:
-            return video.duration > 240 && video.duration <= 600;
-          case 4:
-            return video.duration > 600;
-          default:
-            return true;
-        }
-      })
-      .sort((a, b) => {
-        switch (activeFilterCategory) {
-          case 2:
-            return (
-              new Date(a.publishedAt).getTime() -
-              new Date(b.publishedAt).getTime()
-            );
-            break;
-          case 3:
-            return b.collectCount - a.collectCount;
-            break;
-          default:
-            return 1;
-        }
-        return 1;
-      });
-  }
-
-  const sortvideos = sortFunc(videos);
+  const sortedVideos = sortFunc(
+    videos,
+    activeFilterLength,
+    activeFilterCategory
+  );
 
   return (
     <>
@@ -151,11 +119,11 @@ export default function Home({ data }: VideoPropsType) {
         </nav>
         <div
           className={
-            sortvideos.length >= 4 ? styles.content : styles.content_flex
+            sortedVideos.length >= 4 ? styles.content : styles.content_flex
           }
         >
-          {sortvideos.length !== 0 ? (
-            sortvideos.map((video: VideoItemType) => (
+          {sortedVideos.length !== 0 ? (
+            sortedVideos.map((video: VideoItemType) => (
               <Preview key={video.id} video={video} />
             ))
           ) : (

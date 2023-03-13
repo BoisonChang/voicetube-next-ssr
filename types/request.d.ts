@@ -1,6 +1,6 @@
-type CaptionType = "cht" | "ja" | "vi" | "en";
+export type CaptionType = "cht" | "ja" | "vi" | "en";
 
-type VideoItemType = {
+export type VideoItemType = {
   id: number;
   thumbnail: string;
   title: string;
@@ -15,8 +15,10 @@ type VideoItemType = {
 export type VideoPropsType = {
   data: {
     status: boolean;
-    data: {
-      videos: VideoItemType[];
-    };
+    data: VideoData;
   };
 };
+
+export interface PreviewPropsType {
+  video: VideoItemType;
+}

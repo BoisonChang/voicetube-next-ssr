@@ -2,15 +2,11 @@ import React from "react";
 import styles from "./style.module.scss";
 import Image from "next/image";
 import { myLoader } from "@/helper/img";
-import { VideoItemType } from "@/types/request";
+import { PreviewPropsType } from "@/types/request";
 import { getLevel, formatTime } from "@/helper/content";
 import PreviewLangtab from "@/components/Preview/previewLangTab";
 
-interface PreviewProps {
-  video: VideoItemType;
-}
-
-function Preview({ video }: PreviewProps) {
+function Preview({ video }: PreviewPropsType) {
   return (
     <div className={styles.content_item}>
       <div className={styles.content_preview}>
