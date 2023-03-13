@@ -20,9 +20,7 @@ function Preview({ video }: PreviewProps) {
           alt={video.title}
           fill
         />
-        <div className={styles.content_time}>
-          {formatTime(video.publishedAt)}
-        </div>
+        <div className={styles.content_time}>{formatTime(video.duration)}</div>
       </div>
       <div className={styles.content_description}>
         <div className={styles.content_description_title}>{video.title}</div>

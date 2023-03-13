@@ -27,9 +27,10 @@ export function getLanguageName(
   }
 }
 
-export function formatTime(timeString: string): string {
-  const time = new Date(timeString);
-  return time
-    .toLocaleTimeString("en-US", { timeZone: "UTC", hour12: false })
-    .slice(0, -3);
+export function formatTime(seconds: number): string {
+  const mins = Math.floor(seconds / 60);
+  const secs = seconds % 60;
+  const paddedMins = mins.toString().padStart(2, "0");
+  const paddedSecs = secs.toString().padStart(2, "0");
+  return `${paddedMins}:${paddedSecs}`;
 }
