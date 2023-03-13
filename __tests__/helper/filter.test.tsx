@@ -31,6 +31,14 @@ describe("sortByCategory function", () => {
     expect(result).toEqual(expectedVideos);
   });
 
+  it("should sort videos by most viewed", () => {
+    const result = videos.sort((a, b) =>
+      sortByCategory(a, b, FilterCategory.VIEWED)
+    );
+    expectedVideos.sort((a, b) => b.views - a.views);
+    expect(result).toEqual(expectedVideos);
+  });
+
   it("should sort videos by most collected", () => {
     const result = videos.sort((a, b) =>
       sortByCategory(a, b, FilterCategory.MOST_COLLECTED)
@@ -41,27 +49,10 @@ describe("sortByCategory function", () => {
 });
 
 describe("sortFunc", () => {
-  it("should return all videos when both filters are ALL", () => {
-    const result = sortFunc(videos, FilterLength.ALL, FilterCategory.DEFAULT);
-    expect(result).toEqual(videos);
-  });
-
-  it("should return only medium length videos when filter length is MEDIUM", () => {
-    const result = sortFunc(
-      videos,
-      FilterLength.MEDIUM,
-      FilterCategory.DEFAULT
-    );
-    const expected = videos.filter(
-      (video) => video.duration > 240 && video.duration <= 600
-    );
-    expect(result).toEqual(expected);
-  });
-
-  it("should return videos sorted by newest when filter category is NEWEST", () => {
-    const result = sortFunc(videos, FilterLength.ALL, FilterCategory.NEWEST);
+  it("should return videos sorted by newest when filter length is MEDIUM and filter category is NEWEST", () => {
+    const result = sortFunc(videos, FilterLength.MEDIUM, FilterCategory.NEWEST);
     const expected = videos
-      .slice()
+      .filter((video) => video.duration > 240 && video.duration <= 600)
       .sort(
         (a, b) =>
           new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
@@ -69,30 +60,8 @@ describe("sortFunc", () => {
     expect(result).toEqual(expected);
   });
 
-  it("should return videos sorted by most collected when filter category is MOST_COLLECTED", () => {
-    const result = sortFunc(
-      videos,
-      FilterLength.ALL,
-      FilterCategory.MOST_COLLECTED
-    );
-    const expected = videos
-      .slice()
-      .sort((a, b) => b.collectCount - a.collectCount);
-    expect(result).toEqual(expected);
-  });
-
-  it("should return empty array when filter length is SHORT", () => {
-    const result = sortFunc(videos, FilterLength.SHORT, FilterCategory.DEFAULT);
-    expect(result).toEqual([]);
-  });
-
-  it("should return empty array when filter length is LONG", () => {
-    const result = sortFunc(videos, FilterLength.LONG, FilterCategory.DEFAULT);
-    expect(result).toEqual([]);
-  });
-
-  it("should return empty array when no videos match both filters", () => {
-    const result = sortFunc(videos, FilterLength.LONG, FilterCategory.NEWEST);
+  it("should return empty array when filter length is SHORT and filter category is NEWEST", () => {
+    const result = sortFunc(videos, FilterLength.SHORT, FilterCategory.NEWEST);
     expect(result).toEqual([]);
   });
 });

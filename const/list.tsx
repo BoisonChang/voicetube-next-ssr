@@ -1,12 +1,12 @@
 export enum FilterLength {
-  ALL,
+  ALL = 1,
   SHORT,
   MEDIUM,
   LONG,
 }
 
 export enum FilterCategory {
-  DEFAULT,
-  NEWEST,
+  NEWEST = 1,
+  VIEWED,
   MOST_COLLECTED,
 }

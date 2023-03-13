@@ -22,7 +22,6 @@ describe("Preview component", () => {
 
   it("should render Preview component", () => {
     renderPreviewComponent();
-
     expect(screen.getByText("Test Title")).toBeInTheDocument();
     expect(screen.getByText("02:00")).toBeInTheDocument();
     expect(screen.getByText("100")).toBeInTheDocument();
@@ -31,7 +30,6 @@ describe("Preview component", () => {
 
   it("should render Preview component with correct thumbnail", () => {
     renderPreviewComponent();
-
     const thumbnailElement = screen.getByTestId("preview-thumbnail");
     expect(thumbnailElement.getAttribute("src")).toContain(
       "http://test.com/thumbnail.jpg"

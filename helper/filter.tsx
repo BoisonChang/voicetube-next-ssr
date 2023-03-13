@@ -6,6 +6,8 @@ export function filterByLength(
   filterLength: FilterLength
 ) {
   switch (filterLength) {
+    case FilterLength.ALL:
+      return true;
     case FilterLength.SHORT:
       return video.duration <= 240;
     case FilterLength.MEDIUM:
@@ -27,6 +29,8 @@ export function sortByCategory(
       return (
         new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()
       );
+    case FilterCategory.VIEWED:
+      return b.views - a.views;
     case FilterCategory.MOST_COLLECTED:
       return b.collectCount - a.collectCount;
     default:
