@@ -15,12 +15,15 @@ function Preview({ video }: PreviewProps) {
     <div className={styles.content_item}>
       <div className={styles.content_preview}>
         <Image
+          data-testid="preview-thumbnail"
           loader={myLoader}
           src={`${video.thumbnail}`}
           alt={video.title}
           fill
         />
-        <div className={styles.content_time}>{formatTime(video.duration)}</div>
+        <div data-testid="preview-time" className={styles.content_time}>
+          {formatTime(video.duration)}
+        </div>
       </div>
       <div className={styles.content_description}>
         <div className={styles.content_description_title}>{video.title}</div>
@@ -29,7 +32,10 @@ function Preview({ video }: PreviewProps) {
         <div className={styles.content_description_count_pic}>
           <Image loader={myLoader} src="/headset.svg" alt="headset" fill />
         </div>
-        <div className={styles.content_description_count_content}>
+        <div
+          data-testid="preview-views"
+          className={styles.content_description_count_content}
+        >
           {video.views}
         </div>
       </div>
@@ -38,6 +44,7 @@ function Preview({ video }: PreviewProps) {
           <PreviewLangtab key={caption} caption={caption} />
         ))}
         <div
+          data-testid="preview-level"
           className={styles.content_tag_level}
           style={{
             backgroundColor:

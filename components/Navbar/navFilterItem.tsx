@@ -11,6 +11,7 @@ const NavbarFilterItem: React.FC<NavbarPropsType> = ({
     <>
       {filters.map((filter) => (
         <div
+          data-testid="filter-nav"
           key={filter.id}
           className={`${
             filter.id === activeFilter

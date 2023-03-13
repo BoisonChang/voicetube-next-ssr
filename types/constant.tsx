@@ -1,1 +1,1 @@
-export type LanguageCodeType = "ja" | "vi" | "en" | "cht";
+export type LanguageCodeType = "ja" | "vi" | "en" | "cht" | string;
