@@ -11,28 +11,26 @@ describe("NavbarFilterItem", () => {
   const activeFilter = 1;
   const mockHandleClick = jest.fn();
 
-  it("renders the filter buttons correctly", () => {
-    render(
-      <NavbarFilterItem
-        filters={filters}
-        activeFilter={activeFilter}
-        handleClick={mockHandleClick}
-      />
-    );
-    const filterButtons = screen.getAllByTestId("filter-nav");
-    expect(filterButtons).toHaveLength(3);
-  });
+  describe("when rendered", () => {
+    beforeEach(() => {
+      render(
+        <NavbarFilterItem
+          filters={filters}
+          activeFilter={activeFilter}
+          handleClick={mockHandleClick}
+        />
+      );
+    });
 
-  it("calls the click handler when a filter button is clicked", () => {
-    render(
-      <NavbarFilterItem
-        filters={filters}
-        activeFilter={activeFilter}
-        handleClick={mockHandleClick}
-      />
-    );
-    const filterButton = screen.getByText("觀看次數");
-    fireEvent.click(filterButton);
-    expect(mockHandleClick).toHaveBeenCalledWith(2);
+    it("renders the filter buttons correctly", () => {
+      const filterButtons = screen.getAllByTestId("filter-nav");
+      expect(filterButtons).toHaveLength(3);
+    });
+
+    it("calls the click handler when a filter button is clicked", () => {
+      const filterButton = screen.getByText("觀看次數");
+      fireEvent.click(filterButton);
+      expect(mockHandleClick).toHaveBeenCalledWith(2);
+    });
   });
 });

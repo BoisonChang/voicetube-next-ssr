@@ -16,21 +16,22 @@ describe("Preview component", () => {
     collectCount: 4347,
   };
 
-  it("should render Preview component", () => {
+  const renderPreviewComponent = () => {
     render(<Preview video={mockVideo} />);
-    const titleElement = screen.getByText("Test Title");
-    const timeElement = screen.getByText("02:00");
-    const viewsElement = screen.getByText("100");
-    const levelElement = screen.getByText("中級");
+  };
 
-    expect(titleElement).toBeInTheDocument();
-    expect(timeElement).toBeInTheDocument();
-    expect(viewsElement).toBeInTheDocument();
-    expect(levelElement).toBeInTheDocument();
+  it("should render Preview component", () => {
+    renderPreviewComponent();
+
+    expect(screen.getByText("Test Title")).toBeInTheDocument();
+    expect(screen.getByText("02:00")).toBeInTheDocument();
+    expect(screen.getByText("100")).toBeInTheDocument();
+    expect(screen.getByText("中級")).toBeInTheDocument();
   });
 
   it("should render Preview component with correct thumbnail", () => {
-    render(<Preview video={mockVideo} />);
+    renderPreviewComponent();
+
     const thumbnailElement = screen.getByTestId("preview-thumbnail");
     expect(thumbnailElement.getAttribute("src")).toContain(
       "http://test.com/thumbnail.jpg"

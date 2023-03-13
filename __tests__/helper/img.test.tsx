@@ -2,20 +2,25 @@ import { myLoader } from "@/helper/img";
 import { MyLoaderProps } from "@/types/components";
 
 describe("myLoader", () => {
+  const testImageUrl = "http://test.com/image.jpg";
+  const testWidth = 1000;
+  const testQuality = 75;
+
   const props: MyLoaderProps = {
-    src: "http://test.com/image.jpg",
-    width: 1000,
+    src: testImageUrl,
+    width: testWidth,
   };
 
   it("returns the correct URL with default quality", () => {
-    const expectedUrl = "http://test.com/image.jpg?w=1000&q=75";
+    const expectedUrl = `${testImageUrl}?w=${testWidth}&q=${testQuality}`;
     const result = myLoader(props);
     expect(result).toEqual(expectedUrl);
   });
 
   it("returns the correct URL with custom quality", () => {
-    const expectedUrl = "http://test.com/image.jpg?w=1000&q=50";
-    const result = myLoader({ ...props, quality: 50 });
+    const customQuality = 50;
+    const expectedUrl = `${testImageUrl}?w=${testWidth}&q=${customQuality}`;
+    const result = myLoader({ ...props, quality: customQuality });
     expect(result).toEqual(expectedUrl);
   });
 });
