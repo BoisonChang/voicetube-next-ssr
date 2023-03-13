@@ -59,6 +59,7 @@ export default function Home({ data }: VideoPropsType) {
   ]);
 
   const [videos, setVideos] = useState<VideoItemType[]>([]);
+
   useEffect(() => {
     if (data) {
       setVideos(data.data.videos);
@@ -80,6 +81,40 @@ export default function Home({ data }: VideoPropsType) {
         break;
     }
   };
+
+  function sortFunc(videos: VideoItemType[]) {
+    return videos
+      .filter((video) => {
+        switch (activeFilterLength) {
+          case 2:
+            return video.duration <= 240;
+          case 3:
+            return video.duration > 240 && video.duration <= 600;
+          case 4:
+            return video.duration > 600;
+          default:
+            return true;
+        }
+      })
+      .sort((a, b) => {
+        switch (activeFilterCategory) {
+          case 2:
+            return (
+              new Date(a.publishedAt).getTime() -
+              new Date(b.publishedAt).getTime()
+            );
+            break;
+          case 3:
+            return b.collectCount - a.collectCount;
+            break;
+          default:
+            return 1;
+        }
+        return 1;
+      });
+  }
+
+  const sortvideos = sortFunc(videos);
 
   return (
     <>
@@ -114,10 +149,18 @@ export default function Home({ data }: VideoPropsType) {
             />
           </div>
         </nav>
-        <div className={styles.content}>
-          {videos.map((video: VideoItemType) => (
-            <Preview key={video.id} video={video} />
-          ))}
+        <div
+          className={
+            sortvideos.length >= 4 ? styles.content : styles.content_flex
+          }
+        >
+          {sortvideos.length !== 0 ? (
+            sortvideos.map((video: VideoItemType) => (
+              <Preview key={video.id} video={video} />
+            ))
+          ) : (
+            <h2>沒有篩選結果</h2>
+          )}
         </div>
       </main>
     </>

@@ -4,6 +4,7 @@
   border-radius: 4px 4px 0 0;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.3);
   cursor: pointer;
+  flex-basis: 30%;
 }
 
 .content_item:hover .content_preview {
@@ -44,7 +45,7 @@
   color: #212b36;
   letter-spacing: 0;
   line-height: 20px;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1200px) {
     padding-bottom: 60px;
   }
 }
@@ -68,7 +69,7 @@
   left: 10px;
   bottom: 20px;
   z-index: 2;
-  @media screen and (max-width: 992px) {
+  @media screen and (max-width: 1200px) {
     bottom: 30px;
   }
 }

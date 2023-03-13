@@ -1,11 +1,10 @@
 .main {
   display: flex;
-  align-items: center;
-  justify-content: center;
   flex-direction: column;
   height: 100vh;
   width: 100%;
   padding: 0 3%;
+  padding-top: 20%;
   font-family: "NotoSansCJK";
   font-weight: 400;
   background: #fff;
@@ -41,8 +40,15 @@
   margin-top: 31px;
   padding: 0 10px;
   display: grid;
-  grid-template-columns: repeat(4, minmax(250px, 1fr));
+  grid-template-columns: repeat(4, minmax(150px, 1fr));
   justify-items: space-between;
   grid-gap: 20px;
   width: 100%;
+}
+
+.content_flex {
+  margin-top: 31px;
+  padding: 0 10px;
+  display: flex;
+  justify-content: space-between;
 }
