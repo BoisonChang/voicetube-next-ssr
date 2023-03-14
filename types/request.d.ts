@@ -18,7 +18,6 @@ export type VideoPropsType = {
     data: VideoData;
   };
 };
-
 export interface PreviewPropsType {
   video: VideoItemType;
 }

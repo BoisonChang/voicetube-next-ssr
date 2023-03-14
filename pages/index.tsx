@@ -1,35 +1,27 @@
 import Head from "next/head";
 import axios from "axios";
 import styles from "@/styles/Home.module.scss";
-import { Inter } from "next/font/google";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar/navbar";
 import Preview from "@/components/Preview/preview";
-import { GetServerSideProps, GetServerSidePropsContext } from "next";
+import { GetServerSideProps } from "next";
 import { VideoPropsType, VideoItemType } from "@/types/request";
 import { FilterType } from "@/types/components";
 import { sortFunc } from "@/helper/filter";
 
-export const getServerSideProps: GetServerSideProps<VideoPropsType> = async (
-  context: GetServerSidePropsContext
-) => {
+export const getServerSideProps: GetServerSideProps<
+  VideoPropsType
+> = async () => {
   try {
     const response = await axios.get(
       "https://us-central1-lithe-window-713.cloudfunctions.net/frontendQuiz"
     );
-    const data = response.data;
-    const videos = data.data.map((video: VideoItemType) => {
-      return {
-        ...video,
-        publishedAt: new Date(video.publishedAt).toISOString(),
-      };
-    });
     return {
       props: {
         data: {
-          status: data.status || 0,
+          status: response.data.status || 0,
           data: {
-            videos: videos,
+            videos: response.data.data,
           },
         },
       },
