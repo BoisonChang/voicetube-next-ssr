@@ -52,7 +52,7 @@ describe("sortFunc", () => {
   it("should return videos sorted by newest when filter length is MEDIUM and filter category is NEWEST", () => {
     const result = sortFunc(videos, FilterLength.MEDIUM, FilterCategory.NEWEST);
     const expected = videos
-      .filter((video) => video.duration > 240 && video.duration <= 600)
+      .filter((video) => video.duration > 300 && video.duration <= 600)
       .sort(
         (a, b) =>
           new Date(a.publishedAt).getTime() - new Date(b.publishedAt).getTime()

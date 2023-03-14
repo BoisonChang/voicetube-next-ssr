@@ -11,7 +11,7 @@ export function filterByLength(
     case FilterLength.SHORT:
       return video.duration <= 240;
     case FilterLength.MEDIUM:
-      return video.duration > 240 && video.duration <= 600;
+      return video.duration > 300 && video.duration <= 600;
     case FilterLength.LONG:
       return video.duration > 600;
     default:
