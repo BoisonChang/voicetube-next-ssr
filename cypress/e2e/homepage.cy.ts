@@ -7,10 +7,7 @@ describe("home page filter function", () => {
   it("home page category filter function sorts videos by views", () => {
     cy.contains("觀看次數").click();
 
-    // Get all the preview views elements
     const previewViews = cy.get('[data-testid="preview-views"]');
-
-    // Assert that the preview views are sorted in descending order
     previewViews.should(($views) => {
       let prevViews = parseInt($views.first().text(), 10);
       $views.slice(1).each((_, view) => {
