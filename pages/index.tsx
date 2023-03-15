@@ -34,16 +34,16 @@ export const getServerSideProps: GetServerSideProps<
 };
 
 const filterCategories: FilterType[] = [
-  { id: 1, name: "發布時間" },
+  { id: 1, name: "發佈時間" },
   { id: 2, name: "觀看次數" },
   { id: 3, name: "收藏次數" },
 ];
 
 const filterLength: FilterType[] = [
   { id: 1, name: "不限" },
-  { id: 2, name: "4分鐘以下" },
+  { id: 2, name: "4 分鐘以下" },
   { id: 3, name: "5 - 10 分鐘" },
-  { id: 4, name: "超過10 分鐘" },
+  { id: 4, name: "超過 10 分鐘" },
 ];
 
 export default function Home({ data }: VideoPropsType) {

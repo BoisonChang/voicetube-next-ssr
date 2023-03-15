@@ -17,7 +17,7 @@ function Preview({ video }: PreviewPropsType) {
           alt={video.title}
           fill
         />
-        <div data-testid="preview-time" className={styles.content_time}>
+        <div data-testid="preview-duration" className={styles.content_time}>
           {formatTime(video.duration)}
         </div>
       </div>
