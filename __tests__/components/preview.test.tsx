@@ -1,10 +1,10 @@
 import { render, screen } from "@testing-library/react";
 import Preview from "@/components/Preview/preview";
-import { VideoItemType } from "@/types/request";
+import { PreviewPropsType } from "@/types/request";
 import "@testing-library/jest-dom/extend-expect";
 
 describe("Preview component", () => {
-  const mockVideo: VideoItemType = {
+  const mockVideo: PreviewPropsType = {
     id: 1,
     thumbnail: "http://test.com/thumbnail.jpg",
     title: "Test Title",
@@ -17,7 +17,17 @@ describe("Preview component", () => {
   };
 
   const renderPreviewComponent = () => {
-    render(<Preview video={mockVideo} />);
+    render(
+      <Preview
+        key={mockVideo.id}
+        title={mockVideo.title}
+        thumbnail={mockVideo.thumbnail}
+        duration={mockVideo.duration}
+        views={mockVideo.views}
+        captions={mockVideo.captions}
+        level={mockVideo.level}
+      />
+    );
   };
 
   it("should render Preview component", () => {
