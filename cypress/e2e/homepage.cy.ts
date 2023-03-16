@@ -1,9 +1,32 @@
 export {};
+import data from "../fixtures/preview.json";
+import { VideoItemType } from "@/types/request";
 
 describe("home page filter function", () => {
   beforeEach(() => {
-    cy.visit("/");
+    cy.visit("/", {
+      onBeforeLoad: (win) => {
+        let nextData: {
+          status: boolean;
+          data: VideoItemType;
+        };
+
+        Object.defineProperty(win, "__NEXT_DATA__", {
+          set(o) {
+            console.log("setting __NEXT_DATA__", o);
+            console.log("data", data);
+            // here is our change to modify the injected parsed data
+            o.props.pageProps.data = data;
+            nextData = o;
+          },
+          get() {
+            return nextData;
+          },
+        });
+      },
+    });
   });
+
   it("home page category filter function sorts videos by views", () => {
     cy.contains("觀看次數").click();
 
