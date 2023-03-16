@@ -4,27 +4,17 @@ import styles from "@/styles/Home.module.scss";
 import { useEffect, useState } from "react";
 import Navbar from "@/components/Navbar/navbar";
 import Preview from "@/components/Preview/preview";
-import { GetServerSideProps } from "next";
-import { VideoPropsType, VideoItemType } from "@/types/request";
+import { PreviewPropsType } from "@/types/request";
 import { FilterType } from "@/types/components";
 import { sortFunc } from "@/helper/filter";
 
-export const getServerSideProps: GetServerSideProps<
-  VideoPropsType
-> = async () => {
+export const getServerSideProps = async () => {
   try {
     const response = await axios.get(
       "https://us-central1-lithe-window-713.cloudfunctions.net/frontendQuiz"
     );
     return {
-      props: {
-        data: {
-          status: response.data.status || 0,
-          data: {
-            videos: response.data.data,
-          },
-        },
-      },
+      props: { data: response.data.data },
     };
   } catch (err) {
     return {
@@ -46,14 +36,14 @@ const filterLength: FilterType[] = [
   { id: 4, name: "超過 10 分鐘" },
 ];
 
-export default function Home({ data }: VideoPropsType) {
-  const [videos, setVideos] = useState<VideoItemType[]>([]);
+export default function Home(data: { data: PreviewPropsType[] }) {
+  const [videos, setVideos] = useState<PreviewPropsType[]>([]);
   const [activeFilterCategory, setActiveFilterCategory] = useState<number>(0);
   const [activeFilterLength, setActiveFilterLength] = useState<number>(0);
 
   useEffect(() => {
     if (data) {
-      setVideos(data.data.videos);
+      setVideos(data.data);
     }
   }, [data]);
 
@@ -115,8 +105,16 @@ export default function Home({ data }: VideoPropsType) {
           }
         >
           {sortedVideos.length !== 0 ? (
-            sortedVideos.map((video: VideoItemType) => (
-              <Preview key={video.id} video={video} />
+            sortedVideos.map((data: PreviewPropsType) => (
+              <Preview
+                key={data.id}
+                title={data.title}
+                thumbnail={data.thumbnail}
+                duration={data.duration}
+                views={data.views}
+                captions={data.captions}
+                level={data.level}
+              />
             ))
           ) : (
             <h2>沒有篩選結果</h2>

@@ -1,6 +1,6 @@
 export {};
 import data from "../fixtures/preview.json";
-import { VideoItemType } from "@/types/request";
+import { PreviewPropsType } from "@/types/request";
 
 describe("home page filter function", () => {
   beforeEach(() => {
@@ -8,7 +8,7 @@ describe("home page filter function", () => {
       onBeforeLoad: (win) => {
         let nextData: {
           status: boolean;
-          data: VideoItemType;
+          data: PreviewPropsType;
         };
 
         Object.defineProperty(win, "__NEXT_DATA__", {
@@ -16,7 +16,7 @@ describe("home page filter function", () => {
             console.log("setting __NEXT_DATA__", o);
             console.log("data", data);
             // here is our change to modify the injected parsed data
-            o.props.pageProps.data = data;
+            o.props.pageProps.data.data = data.data;
             nextData = o;
           },
           get() {
@@ -49,7 +49,7 @@ describe("home page filter function", () => {
     ];
 
     filters.forEach((filter) => {
-      cy.contains(filter.label).click();
+      cy.contains(filter.label).click().click();
 
       cy.get("body").then((body) => {
         if (body.find('[data-testid="preview-duration"]').length === 0) {

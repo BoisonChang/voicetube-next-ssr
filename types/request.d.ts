@@ -1,23 +1,24 @@
 export type CaptionType = "cht" | "ja" | "vi" | "en";
 
-export type VideoItemType = {
-  id: number;
+interface PreviewPropsBaseType {
+  id?: number;
+  key?: number;
   thumbnail: string;
   title: string;
   views: number;
-  collectCount: number;
   duration: number;
-  publishedAt: string;
   level: 1 | 2 | 3;
   captions: CaptionType[];
-};
+}
+
+export interface PreviewPropsType extends PreviewPropsBaseType {
+  collectCount: number;
+  publishedAt: string;
+}
 
 export type VideoPropsType = {
   data: {
     status: boolean;
-    data: VideoData;
+    data: PreviewPropsType[];
   };
 };
-export interface PreviewPropsType {
-  video: VideoItemType;
-}

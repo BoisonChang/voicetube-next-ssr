@@ -2,27 +2,34 @@ import React from "react";
 import styles from "./style.module.scss";
 import Image from "next/image";
 import { myLoader } from "@/helper/img";
-import { PreviewPropsType } from "@/types/request";
+import { PreviewPropsBaseType } from "@/types/request";
 import { getLevel, formatTime } from "@/helper/content";
 import PreviewLangtab from "@/components/Preview/previewLangTab";
 
-function Preview({ video }: PreviewPropsType) {
+function Preview({
+  title,
+  thumbnail,
+  duration,
+  views,
+  level,
+  captions,
+}: PreviewPropsBaseType) {
   return (
     <div className={styles.content_item}>
       <div className={styles.content_preview}>
         <Image
           data-testid="preview-thumbnail"
           loader={myLoader}
-          src={`${video.thumbnail}`}
-          alt={video.title}
+          src={`${thumbnail}`}
+          alt={title}
           fill
         />
         <div data-testid="preview-duration" className={styles.content_time}>
-          {formatTime(video.duration)}
+          {formatTime(duration)}
         </div>
       </div>
       <div className={styles.content_description}>
-        <div className={styles.content_description_title}>{video.title}</div>
+        <div className={styles.content_description_title}>{title}</div>
       </div>
       <div className={styles.content_description_count}>
         <div className={styles.content_description_count_pic}>
@@ -32,11 +39,11 @@ function Preview({ video }: PreviewPropsType) {
           data-testid="preview-views"
           className={styles.content_description_count_content}
         >
-          {video.views}
+          {views}
         </div>
       </div>
       <div className={styles.content_tag}>
-        {video.captions.map((caption) => (
+        {captions.map((caption) => (
           <PreviewLangtab key={caption} caption={caption} />
         ))}
         <div
@@ -44,14 +51,10 @@ function Preview({ video }: PreviewPropsType) {
           className={styles.content_tag_level}
           style={{
             backgroundColor:
-              video.level === 1
-                ? "#37c597"
-                : video.level === 2
-                ? "#ffb900"
-                : "#ed7d4f",
+              level === 1 ? "#37c597" : level === 2 ? "#ffb900" : "#ed7d4f",
           }}
         >
-          {getLevel(video.level)}
+          {getLevel(level)}
         </div>
       </div>
     </div>

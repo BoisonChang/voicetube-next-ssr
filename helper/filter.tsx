@@ -1,8 +1,8 @@
-import { VideoItemType } from "@/types/request";
+import { PreviewPropsType } from "@/types/request";
 import { FilterLength, FilterCategory } from "@/const/list";
 
 export function filterByLength(
-  video: VideoItemType,
+  video: PreviewPropsType,
   filterLength: FilterLength
 ) {
   switch (filterLength) {
@@ -20,8 +20,8 @@ export function filterByLength(
 }
 
 export function sortByCategory(
-  a: VideoItemType,
-  b: VideoItemType,
+  a: PreviewPropsType,
+  b: PreviewPropsType,
   filterCategory: FilterCategory
 ) {
   switch (filterCategory) {
@@ -39,11 +39,11 @@ export function sortByCategory(
 }
 
 export function sortFunc(
-  videos: VideoItemType[],
+  videos: PreviewPropsType[],
   activeFilterLength: FilterLength,
   activeFilterCategory: FilterCategory
 ) {
   return videos
-    .filter((video) => filterByLength(video, activeFilterLength))
-    .sort((a, b) => sortByCategory(a, b, activeFilterCategory));
+    .sort((a, b) => sortByCategory(a, b, activeFilterCategory))
+    .filter((video) => filterByLength(video, activeFilterLength));
 }
