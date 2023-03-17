@@ -1,6 +1,6 @@
 export {};
 import data from "../fixtures/preview.json";
-import { PreviewPropsType } from "@/types/request";
+import { PreviewPropsType } from "../../types/request";
 
 describe("home page filter function", () => {
   beforeEach(() => {
