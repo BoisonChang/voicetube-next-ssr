@@ -1,6 +1,6 @@
-import { VideoItemType } from "@/types/request";
+import { PreviewPropsType } from "@/types/request";
 
-export const video: VideoItemType = {
+export const video: PreviewPropsType = {
   id: 0,
   thumbnail: "https://cdn.voicetube.com/assets/thumbnails/wWV0NCPD050.jpg",
   title: "Quisquam voluptatem quaerat sed est.",
@@ -12,7 +12,7 @@ export const video: VideoItemType = {
   captions: ["cht", "en"],
 };
 
-export const videos: VideoItemType[] = [
+export const videos: PreviewPropsType[] = [
   {
     id: 0,
     thumbnail: "https://cdn.voicetube.com/assets/thumbnails/wWV0NCPD050.jpg",
