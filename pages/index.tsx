@@ -7,6 +7,7 @@ import Preview from "@/components/Preview/preview";
 import { PreviewPropsType } from "@/types/request";
 import { FilterType } from "@/types/components";
 import { sortFunc } from "@/helper/filter";
+import data from "@/cypress/fixtures/preview.json";
 
 export const getServerSideProps = async () => {
   try {
@@ -14,11 +15,15 @@ export const getServerSideProps = async () => {
       "https://us-central1-lithe-window-713.cloudfunctions.net/frontendQuiz"
     );
     return {
-      props: { data: response.data.data },
+      props: {
+        data: response.data.data.length !== 0 ? response.data.data : data,
+      },
     };
   } catch (err) {
     return {
-      notFound: true,
+      props: {
+        data: data,
+      },
     };
   }
 };
